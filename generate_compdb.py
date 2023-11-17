@@ -26,7 +26,8 @@ def parse_cmd_file(out_dir, cmdfile_path):
     with open(cmdfile_path, 'r') as cmdfile:
         cmdfile_content = cmdfile.read()
 
-    commands = { match.group(1): match.group(2) for match in CMD_VAR_RE.finditer(cmdfile_content) }
+ 
+    commands = { match.group(1): match.group(2).split(";",1)[0] for match in CMD_VAR_RE.finditer(cmdfile_content) }
     sources = { match.group(1): match.group(2) for match in SOURCE_VAR_RE.finditer(cmdfile_content) }
 
     return [{
